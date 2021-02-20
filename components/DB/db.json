@@ -1,11 +1,20 @@
 {
     "gameName":[
-        "Memory Name",
+        "Memory Game",
         "Wack-a-mole",
         "Connect four",
         "Snake",
         "Space Invaders",
         "Frogger",
         "Tetris"
+    ],
+    "gameCaller":[
+        "MemoryGame",
+        "wackAMole",
+        "connectFor",
+        "snake",
+        "spaceInvaders",
+        "frongger",
+        "tetris"
     ]
 }

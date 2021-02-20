@@ -3,14 +3,16 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import db from '../components/DB/db.json'
 import Link from 'next/link'
+import MemoryGame from '../components/games/memoryGame'
 
 const GameArea = styled.div`
   background-color: #001655;
-  height:300px;
-  width:300px;
+  height:16.25em;
+  width:18.75em;
   position:absolute;
   z-index:1;
   border-radius:5%;
+  margin-top:-30px;
 
 
   & h1 {
@@ -30,17 +32,17 @@ const GameArea = styled.div`
 
 const GameList = styled.div`
   height:200px;
-  padding-top:20px;
   display:flex;
   flex-direction:column;
   text-align:center;
 `
 
-GameList.Item = styled.a`
+GameList.Item = styled.button`
   color:#fff;
   font-family:Arial, Helvetica, sans-serif;
   cursor:pointer;
   margin:3px;
+  background-color:#001655;
 
   &:hover{
     background-color:#5880F1
@@ -50,21 +52,40 @@ GameList.Item = styled.a`
 `
 
 
-function MyApp() {
+
+function MyApp({game}) {
+
+  function showGame(event, game){
+    event.preventDefault()
+    console.log(<game />)
+    return(
+        < game />
+    )
+  }
+  
+ 
+
   return (
     <div className='myApp'>
+      
       <GameArea>
         <h1>Game Station</h1>
-        <GameList>
+        
+      {<GameList>
+          
           {db.gameName.map((item, index) => {
-            return (<GameList.Item key={item+index}>
+            return (<GameList.Item key={item+index} game={db.gameCaller[index]} onClick={showGame}>
               
                   {item} 
                
                </GameList.Item>)
           })}
-        </GameList>
+        </GameList>}
+
+       
+        
       </GameArea>
+      {/* <MemoryGame />*/}
       <div className='gameStation'>
         <Image src='/appAssets/ArcadeMachine.png'
           alt='arcade machine'

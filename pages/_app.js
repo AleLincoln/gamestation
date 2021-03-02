@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import db from '../components/DB/db.json'
 import Link from 'next/link'
 import MemoryGame from '../components/games/memoryGame'
+import { useState } from 'react'
+
 
 const GameArea = styled.div`
   background-color: #001655;
@@ -51,22 +53,37 @@ GameList.Item = styled.button`
 
 `
 
+const GamePlaced = styled.div`
+  position:absolute;
+  width:800px;
+  z-index:2;
+
+`
+
 
 
 function MyApp({game}) {
 
-  function showGame(event, game){
-    event.preventDefault()
-    console.log(<game />)
-    return(
-        < game />
-    )
-  }
-  
- 
+  const [isGameCalled, setIsGameCalled] = useState(false)
+  const [gameCalled, setGameCalled] = useState('')
 
-  return (
-    <div className='myApp'>
+
+
+  function showGame(event){
+    
+    game = event.target.innerHTML
+    setIsGameCalled(true)
+
+    if(game === 'Memory Game'){
+      setGameCalled(
+        game
+      )
+    }
+
+  }
+
+ return (
+   <div className='myApp'>
       
       <GameArea>
         <h1>Game Station</h1>
@@ -85,7 +102,9 @@ function MyApp({game}) {
        
         
       </GameArea>
-      {/* <MemoryGame />*/}
+
+      
+      
       <div className='gameStation'>
         <Image src='/appAssets/ArcadeMachine.png'
           alt='arcade machine'
@@ -94,8 +113,14 @@ function MyApp({game}) {
         />
         
       </div>
+      <GamePlaced>
+      {isGameCalled && gameCalled === 'Memory Game' && <MemoryGame />}
+
+      </GamePlaced>
+      
     </div>
   )
+
 }
 
 export default MyApp

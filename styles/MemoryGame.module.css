@@ -1,6 +1,6 @@
 
   .innerBody {
-    background: #d0e0e6;
+    background: #001655;
     width: 800px;
     display: flex;
     justify-content: center;
@@ -17,8 +17,8 @@
   }
   
   .pokemonCard {
-    height: 150px;
-    width: 150px;
+    height: 6rem;
+    width: 6rem;
     border-radius: 2px;
     background: #000;
     cursor: pointer;
@@ -59,14 +59,20 @@
   }
   
   .pokemonCard .back {
-    background: #51dce0;
+    background: -webkit-linear-gradient(#eacd02, #e14831);
     color: #d6aeb5;
     font-size: 100px;
-    transition: 0.3s ease all;
+    transition: 0.5s ease all;
   }
   
   .pokemonCard .back:hover {
-    background: #dba8b1;
+    background: -webkit-linear-gradient(#e14831, #eacd02);
     color: #fff;
     transform: scale(1.02);
+  }
+
+  .startButton{
+    font-family: Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
   }

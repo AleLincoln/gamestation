@@ -6,20 +6,31 @@ export default function MemoryGame() {
   const [openedCard, setOpenedCard] = useState([]);
   const [matched, setMatched] = useState([]);
   const [isflippedAllCards, setIsflippedAllCards] = useState(false)
+  const [isStartButtonEnable, setIsStartButtonEnable] = useState(true)
 
   const pokemons = [
     { id: 1, name: "balbasaur" },
     { id: 8, name: "wartotle" },
     { id: 9, name: "blastoise" },
-    { id: 6, name: "charizard" }
+    { id: 6, name: "charizard" },
+    { id: 10, name: "outro personagem" },
+    { id: 11, name: "outro personagem" },
+    { id: 12, name: "outro personagem" }
   ];
+
 
   //currently there are 4 pokemons but we need the pair
 
   const pairOfPokemons = [...pokemons, ...pokemons];
 
   function flipAllCards(){
+    
     setIsflippedAllCards(true)
+
+    setTimeout(() => {
+      setIsflippedAllCards(false)
+      setIsStartButtonEnable(false)
+    }, 1200)
   }
   
 
@@ -56,7 +67,7 @@ export default function MemoryGame() {
           if (matched.includes(pokemon.id)) isFlipped = true;
           return (
             <div
-              className={`${styles.pokemonCard} ${isFlipped ? styles.flipped : ""} ${isflippedAllCards? styles.flipped:''}  `}
+              className={`${styles.pokemonCard} ${isFlipped || isflippedAllCards ? styles.flipped : ""} `}
               key={index}
               onClick={() => flipCard(index)}
             >
@@ -73,7 +84,7 @@ export default function MemoryGame() {
             </div>
           );
         })}
-        <button onClick={flipAllCards}>
+        <button className={styles.startButton} disabled={isStartButtonEnable === false}  onClick={flipAllCards}>
                 Começar
             </button>
       </div>

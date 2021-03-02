@@ -2,9 +2,8 @@ import '../styles/globals.css'
 import Image from 'next/image'
 import styled from 'styled-components'
 import db from '../components/DB/db.json'
-import Link from 'next/link'
 import MemoryGame from '../components/games/memoryGame'
-import { useState } from 'react'
+import {useState } from 'react'
 
 
 const GameArea = styled.div`
@@ -60,27 +59,44 @@ const GamePlaced = styled.div`
 
 `
 
+const CloseButton = styled.button`
+  color:white;
+  display:flex;
+  background-color:#001655;
 
 
-function MyApp({game}) {
+`
+
+
+
+export function MyApp({game}) {
 
   const [isGameCalled, setIsGameCalled] = useState(false)
-  const [gameCalled, setGameCalled] = useState('')
+    const [gameCalled, setGameCalled] = useState('')
 
 
 
-  function showGame(event){
+    function showGame(){
     
-    game = event.target.innerHTML
-    setIsGameCalled(true)
-
-    if(game === 'Memory Game'){
-      setGameCalled(
-        game
-      )
+      game = event.target.innerHTML
+      setIsGameCalled(true)
+  
+      if(game === 'Memory Game'){
+        setGameCalled(
+          game
+        )
+      }
     }
 
-  }
+
+    function closeGame(){
+      setIsGameCalled(false)
+      setGameCalled('')
+    }
+
+ 
+
+  
 
  return (
    <div className='myApp'>
@@ -89,10 +105,12 @@ function MyApp({game}) {
         <h1>Game Station</h1>
         
       {<GameList>
+
           
-          {db.gameName.map((item, index) => {
+          {
+          db.gameName.map((item, index) => {
             return (<GameList.Item key={item+index} game={db.gameCaller[index]} onClick={showGame}>
-              
+                  
                   {item} 
                
                </GameList.Item>)
@@ -114,9 +132,15 @@ function MyApp({game}) {
         
       </div>
       <GamePlaced>
-      {isGameCalled && gameCalled === 'Memory Game' && <MemoryGame />}
+      
+      {isGameCalled && gameCalled === 'Memory Game' &&<div>
+      <CloseButton onClick={closeGame}>Fechar</CloseButton>
+      <MemoryGame />
+      </div> }
 
       </GamePlaced>
+
+      
       
     </div>
   )
